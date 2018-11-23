@@ -23,14 +23,13 @@ class StolenSecrets extends DrawCard {
         card.controller = context.player;
         card.moveTo(Locations.RemovedFromGame);
         context.player.removedFromGame.unshift(card);
-        card.facedown = true;
-        context.source.lastingEffect(ability => ({
+         context.source.lastingEffect(ability => ({
             until: {
                 onCardMoved: event => event.card === card && event.originalLocation === Locations.RemovedFromGame
             },
             match: card,
             effect: [
-                ability.effects.canBeSeenWhenFacedown(),
+                ability.effects.hideWhenFaceUp(),
                 ability.effects.canPlayFromOwn(Locations.RemovedFromGame, [card])
             ]
         }));
