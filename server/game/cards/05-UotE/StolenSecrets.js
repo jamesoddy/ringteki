@@ -23,12 +23,16 @@ class StolenSecrets extends DrawCard {
         card.controller = context.player;
         card.moveTo(Locations.RemovedFromGame);
         context.player.removedFromGame.unshift(card);
+        card.facedown = true;
         context.source.lastingEffect(ability => ({
             until: {
                 onCardMoved: event => event.card === card && event.originalLocation === Locations.RemovedFromGame
             },
             match: card,
-            effect: ability.effects.canPlayFromOwn(Locations.RemovedFromGame, [card])
+            effect: [
+                ability.effects.canBeSeenWhenFacedown(),
+                ability.effects.canPlayFromOwn(Locations.RemovedFromGame, [card])
+            ]
         }));
         if(remainingCards.length > 1) {
             this.rearrangePrompt(context, remainingCards, [], 'Which card do you want to be on top?');
