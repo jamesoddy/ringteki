@@ -23,7 +23,7 @@ class StolenSecrets extends DrawCard {
         card.controller = context.player;
         card.moveTo(Locations.RemovedFromGame);
         context.player.removedFromGame.unshift(card);
-         context.source.lastingEffect(ability => ({
+        context.source.lastingEffect(ability => ({
             until: {
                 onCardMoved: event => event.card === card && event.originalLocation === Locations.RemovedFromGame
             },
