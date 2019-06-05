@@ -104,7 +104,12 @@ export class GameAction {
         this.setDefaultTarget(() => target);
         let events = [];
         this.addEventsToArray(events, context);
-        context.game.queueSimpleStep(() => context.game.openEventWindow(events));
+        events = events.filter(event => !event.resolved && !event.cancelled);
+        context.game.queueSimpleStep(() => {
+            if(events.length > 0) {
+                context.game.openEventWindow(events)
+            }
+        });
     }
 
     getEventArray(context: AbilityContext, additionalProperties = {}): Event[] {

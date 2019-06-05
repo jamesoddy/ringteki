@@ -125,6 +125,18 @@ describe('Policy Debate', function() {
                 this.supernaturalStorm = this.player1.findCardByName('supernatural-storm');
                 expect(this.supernaturalStorm.location).toBe('conflict discard pile');
                 expect(this.player1).toHavePrompt('Conflict Action Window');
+                expect(this.getChatLogs(5).filter(m => m === 'player1 reveals their hand: Supernatural Storm').length).toBe(1);
+            });
+
+            it('should display the reveal chat message only once', function() {
+                this.player2.clickCard('policy-debate');
+                this.player2.clickCard(this.savvyPolitician);
+                this.player2.clickCard(this.prodigyOfTheWaves);
+                this.player1.clickPrompt('1');
+                this.player2.clickPrompt('3');
+                this.player2.clickPrompt('Supernatural Storm');
+                expect(this.getChatLogs(5).filter(m => m === 'player1 reveals their hand: Supernatural Storm').length).toBe(1);
+                expect(this.player1).toHavePrompt('Conflict Action Window');
             });
 
             it('should correctly trigger and resolve on duel won abilities', function() {
