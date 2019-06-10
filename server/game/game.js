@@ -832,6 +832,8 @@ class Game extends EventEmitter {
      * @returns {undefined}
      */
     queueSimpleStep(handler) {
+        console.log('simpleStep');
+        console.log(this.pipeline);
         this.pipeline.queueStep(new SimpleStep(this, handler));
     }
 
@@ -896,6 +898,12 @@ class Game extends EventEmitter {
         if(!_.isArray(events)) {
             events = [events];
         }
+        //events.forEach(e => {
+        //    console.log(e.name)
+        //    if(e.name === 'onResolveRingElement') {
+        //        console.trace();
+        //    }
+        //});
         return this.queueStep(new EventWindow(this, events));
     }
 

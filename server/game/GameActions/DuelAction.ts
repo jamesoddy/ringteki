@@ -67,6 +67,7 @@ export class DuelAction extends CardGameAction {
                 [message, messageArgs] = gameAction.getEffectMessage(context);
             }
             context.game.addMessage('Duel Effect: ' + message, ...messageArgs);
+            console.log('about to resolve duel game action');
             gameAction.resolve(null, context);
         } else {
             context.game.addMessage('The duel has no effect')

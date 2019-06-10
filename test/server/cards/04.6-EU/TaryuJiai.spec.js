@@ -92,12 +92,13 @@ describe('Taryu Jiai', function() {
                 expect(this.player1).toHavePrompt('Choose a ring effect to resolve');
             });
 
-            it('should resolve the ring correctly', function() {
+            fit('should resolve the ring correctly', function() {
                 this.asakoAzunami = this.player1.clickCard('asako-azunami');
                 this.player1.clickCard(this.soshiIllusionist);
                 this.player1.clickPrompt('2');
                 this.player2.clickPrompt('1');
                 this.player1.clickRing('fire');
+                console.log(this.getChatLogs(20));
                 expect(this.player1).toHavePrompt('Fire Ring');
                 this.player1.clickCard(this.asakoAzunami);
                 this.player1.clickPrompt('Honor Asako Azunami');
